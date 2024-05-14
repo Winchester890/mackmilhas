@@ -8,10 +8,10 @@ public class ReservaEntity {
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToOne
+    @OneToMany
     @Column(name = "id_pessoa", nullable = false)
     private Long id_pessoa;
-    @OneToMany
+    @OneToOne
     @Column(name = "id_passagem", nullable = false)
     private Long id_passagem;
 
