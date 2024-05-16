@@ -39,6 +39,16 @@ public class PaginaInicial {
         return this.pessoaRepository.findById(id)
                 .orElseThrow(() -> new Exception("Pessoa não encontrada!"));
     }
+    @PostMapping("/login")
+    public Boolean login(@RequestBody final String nome, final String senha) {
+        PessoaEntity pessoaEntity = this.pessoaRepository.findBySenha(senha);
+        if (pessoaEntity != null) {
+            if (pessoaEntity.getNome().equals(nome) && pessoaEntity.getSenha().equals(senha)) {
+                return true;
+            }
+        }
+        return false;
+    }
     @PostMapping("/reservar")
     public void reservar(@RequestBody final ReservaEntity reservaEntity) {
         this.reservaRepository.save(reservaEntity);
