@@ -22,22 +22,26 @@ public class PaginaInicial {
         this.reservaRepository = reservaRepository;
     }
     @GetMapping("/reservas")
-    public List<ReservaEntity> listarReservas() {
+    public List<ReservaEntity> findReservas() {
         return this.reservaRepository.findAll();
     }
     @GetMapping("/pessoas")
-    public List<PessoaEntity> listarPessoas() {
+    public List<PessoaEntity> findPessoas() {
         return this.pessoaRepository.findAll();
     }
-    @GetMapping("/reservas/{id}")
+    @GetMapping("/reserva/{id}")
     public ReservaEntity findReserva(@PathVariable("id") final Long id) throws Exception {
         return this.reservaRepository.findById(id)
                 .orElseThrow(() -> new Exception("Reserva não encontrada!"));
     }
-    @GetMapping("/pessoas/{id}")
+    @GetMapping("/pessoa/{id}")
     public PessoaEntity findPessoa(@PathVariable("id") final Long id) throws Exception {
         return this.pessoaRepository.findById(id)
                 .orElseThrow(() -> new Exception("Pessoa não encontrada!"));
+    }
+    @GetMapping("/reservas/{idPessoa}")
+    public List<ReservaEntity> findByIdPessoa(@PathVariable("idPessoa") final Long idPessoa) {
+        return this.reservaRepository.findByIdPessoa(idPessoa);
     }
     @PostMapping("/login")
     public Boolean login(@RequestBody final String nome, final String senha) {
@@ -45,9 +49,11 @@ public class PaginaInicial {
         if (pessoaEntity != null) {
             if (pessoaEntity.getNome().equals(nome) && pessoaEntity.getSenha().equals(senha)) {
                 return true;
+            } else {
+                return false;
             }
         }
-        return false;
+        return null;
     }
     @PostMapping("/reservar")
     public void reservar(@RequestBody final ReservaEntity reservaEntity) {
