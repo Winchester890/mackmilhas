@@ -17,6 +17,9 @@ public class PassagemEntity {
     @Column(name = "preco", nullable = false)
     private Double preco;
 
+    public PassagemEntity() {
+    }
+
     public PassagemEntity(Long id, String origem, String destino, String data, Double preco) {
         this.id = id;
         this.origem = origem;
