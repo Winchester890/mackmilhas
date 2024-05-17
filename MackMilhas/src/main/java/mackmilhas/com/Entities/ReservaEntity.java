@@ -8,17 +8,18 @@ public class ReservaEntity {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToMany
     @Column(name = "id_pessoa", nullable = false)
-    private Long id_pessoa;
-    @OneToOne
+    private Long idPessoa;
     @Column(name = "id_passagem", nullable = false)
-    private Long id_passagem;
+    private Long idPassagem;
+
+    public ReservaEntity() {
+    }
 
     public ReservaEntity(Long id, Long id_pessoa, Long id_passagem) {
         this.id = id;
-        this.id_pessoa = id_pessoa;
-        this.id_passagem = id_passagem;
+        this.idPessoa = id_pessoa;
+        this.idPassagem = id_passagem;
     }
 
     public Long getId() {
@@ -29,19 +30,19 @@ public class ReservaEntity {
         this.id = id;
     }
 
-    public Long getId_pessoa() {
-        return id_pessoa;
+    public Long getIdPessoa() {
+        return idPessoa;
     }
 
-    public void setId_pessoa(Long id_pessoa) {
-        this.id_pessoa = id_pessoa;
+    public void setIdPessoa(Long idPessoa) {
+        this.idPessoa = idPessoa;
     }
 
-    public Long getId_passagem() {
-        return id_passagem;
+    public Long getIdPassagem() {
+        return idPassagem;
     }
 
-    public void setId_passagem(Long id_passagem) {
-        this.id_passagem = id_passagem;
+    public void setIdPassagem(Long idPassagem) {
+        this.idPassagem = idPassagem;
     }
 }
