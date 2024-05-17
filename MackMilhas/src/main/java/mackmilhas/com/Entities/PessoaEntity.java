@@ -13,6 +13,9 @@ public class PessoaEntity {
     @Column(name = "senha", nullable = false)
     private String senha;
 
+    public PessoaEntity() {
+    }
+
     public PessoaEntity(Long id, String nome, String senha) {
         this.id = id;
         this.nome = nome;
