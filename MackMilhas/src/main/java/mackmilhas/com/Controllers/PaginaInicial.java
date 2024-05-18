@@ -5,6 +5,8 @@ import mackmilhas.com.Entities.ReservaEntity;
 import mackmilhas.com.Repositories.PessoaRepository;
 import mackmilhas.com.Repositories.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,16 +46,12 @@ public class PaginaInicial {
         return this.reservaRepository.findByIdPessoa(idPessoa);
     }
     @PostMapping("/login")
-    public Boolean login(@RequestBody final String nome, final String senha) {
-        PessoaEntity pessoaEntity = this.pessoaRepository.findBySenha(senha);
+    public ResponseEntity<Boolean> login(@RequestBody final String nome, final String senha) {
+        PessoaEntity pessoaEntity = this.pessoaRepository.findByNomeAndSenha(nome, senha);
         if (pessoaEntity != null) {
-            if (pessoaEntity.getNome().equals(nome) && pessoaEntity.getSenha().equals(senha)) {
-                return true;
-            } else {
-                return false;
-            }
+            return ResponseEntity.ok(true);
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
     }
     @PostMapping("/reservar")
     public void reservar(@RequestBody final ReservaEntity reservaEntity) {
